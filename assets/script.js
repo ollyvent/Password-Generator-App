@@ -90,7 +90,6 @@ var upperCasedCharacters = [
 
 var finalCharacterPool = "";
 
-
 // Function to prompt user for password options
 function getPasswordOptions() {
   var lengthOfPassword = prompt(
@@ -99,11 +98,14 @@ function getPasswordOptions() {
 
   lengthOfPassword = parseInt(lengthOfPassword);
 
-  if (lengthOfPassword < 8 || lengthOfPassword > 128 || isNaN(lengthOfPassword)) {
+  if (
+    lengthOfPassword < 8 ||
+    lengthOfPassword > 128 ||
+    isNaN(lengthOfPassword)
+  ) {
     alert("invalid input, enter a number between 8 and 128");
     return null;
   }
-  
 
   // ask for character types
   var wantLowercase = confirm("Do you want lowercase characters?");
@@ -111,25 +113,29 @@ function getPasswordOptions() {
   var wantNumericChar = confirm("Do you want numeric characters?");
   var wantSpecialChar = confirm("Do you want special characters?");
 
-  if (!wantLowercase && !wantUppercase && !wantNumericChar && !wantSpecialChar){
-    alert('select a character type');
+  if (
+    !wantLowercase &&
+    !wantUppercase &&
+    !wantNumericChar &&
+    !wantSpecialChar
+  ) {
+    alert("select a character type");
     return null;
   }
 
   // conditional statements to populate the final character pool
 
-  if (wantLowercase) finalCharacterPool += lowerCasedCharacters.join('');    
-  if (wantUppercase) finalCharacterPool += upperCasedCharacters.join('');
-  if (wantNumericChar) finalCharacterPool += numericCharacters.join('');
-  if (wantSpecialChar) finalCharacterPool += specialCharacters.join(''); 
+  if (wantLowercase) finalCharacterPool += lowerCasedCharacters.join("");
+  if (wantUppercase) finalCharacterPool += upperCasedCharacters.join("");
+  if (wantNumericChar) finalCharacterPool += numericCharacters.join("");
+  if (wantSpecialChar) finalCharacterPool += specialCharacters.join("");
 
   return {
     length: lengthOfPassword,
-    characterPool: finalCharacterPool
+    characterPool: finalCharacterPool,
   };
-} 
-  // console.log(finalCharacterPool);
-
+}
+// console.log(finalCharacterPool);
 
 // Function for getting a random element from an array
 function getRandom(arr) {
@@ -142,10 +148,10 @@ function generatePassword() {
   var options = getPasswordOptions();
   // if no option is selected, return an empty string
   if (!options) {
-    return '';
+    return "";
   }
 
-  var password = '';
+  var password = "";
   for (var i = 0; i < options.length; i++) {
     password += getRandom(options.characterPool);
   }
@@ -154,12 +160,10 @@ function generatePassword() {
 }
 
 // Get references to the #generate element
-var generateButton = document.getElementById('generate');
+var generateButton = document.getElementById("generate");
 
-generateButton.addEventListener("click", function() {
+generateButton.addEventListener("click", function () {
   var password = generatePassword();
-  var passwordTextArea = document.getElementById('password');
+  var passwordTextArea = document.getElementById("password");
   passwordTextArea.value = password;
 });
-
-
