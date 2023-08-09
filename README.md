@@ -30,7 +30,8 @@ The challenge is to Generate a password when the button is clicked
 my github repo
 https://github.com/ollyvent/Password-Generator-App.git
 
-
+my deployed site
+https://ollyvent.github.io/Password-Generator-App/
 
 
 
