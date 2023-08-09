@@ -88,7 +88,8 @@ var upperCasedCharacters = [
   "Z",
 ];
 
-var finalCharacterPool = [];
+var finalCharacterPool = "";
+
 
 // Function to prompt user for password options
 function getPasswordOptions() {
@@ -98,36 +99,42 @@ function getPasswordOptions() {
 
   lenghtOfPassword = parseInt(lenghtOfPassword);
 
-  if (
-    lenghtOfPassword <= 8 ||
-    lenghtOfPassword >= 128 ||
-    isNaN(lenghtOfPassword)
-  ) {
-    return alert(
-      "invalid input, enter a number between 8 and 128 for lenght of your password "
-    );
+  if (lenghtOfPassword < 8 || lenghtOfPassword > 128 || isNaN(lenghtOfPassword)) {
+    alert("invalid input, enter a number between 8 and 128");
+    return null;
+  }
+  
+
+  // ask for character types
+  var wantLowercase = confirm("Do you want lowercase characters?");
+  var wantUppercase = confirm("Do you want lowercase characters?");
+  var wantNumericChar = confirm("Do you want numeric characters?");
+  var wantSpecialChar = confirm("Do you want special characters?");
+
+  if (!wantLowercase && !wantUppercase && !wantNumericChar && !wantSpecialChar){
+    alert('select a character type');
+    return null;
   }
 
-  var wantsLowercase = confirm("Do you want lowercase chars");
-  var wantsUppercase = confirm("Do you want lowercase chars");
-  var wantSpecialCharacters = confirm("Do you want soecial characters?");
-  // ask for the rest of char types
+  // conditional statements to populate the final character pool
 
-  if (wantsLowercase) {
-    finalCharacterPool.push(...lowerCasedCharacters);
-  }
+  if (wantLowercase) finalCharacterPool += lowerCasedCharacters.join(' ');    
+  if (wantUppercase) finalCharacterPool += upperCasedCharacters.join(' ');
+  if (wantNumericChar) finalCharacterPool += numericCharacters.join(' ');
+  if (wantSpecialChar) finalCharacterPool += specialCharacters.join(' '); 
 
-  if (wantsUppercase) {
-    finalCharacterPool.push(...upperCasedCharacters);
-  }
+  return {
+    lenght: lenghtOfPassword,
+    characterPool: finalCharacterPool
+  };
+} 
+  // console.log(finalCharacterPool);
 
-
-
-  console.log(finalCharacterPool);
-}
 
 // Function for getting a random element from an array
-function getRandom(arr) {}
+function getRandom(arr) {
+  var randomIndex = Math.floor(Math.random() * arr.lenght);
+}
 
 // Function to generate password with user input
 function generatePassword() {
@@ -147,3 +154,5 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
+
