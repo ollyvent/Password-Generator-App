@@ -118,10 +118,10 @@ function getPasswordOptions() {
 
   // conditional statements to populate the final character pool
 
-  if (wantLowercase) finalCharacterPool += lowerCasedCharacters.join(' ');    
-  if (wantUppercase) finalCharacterPool += upperCasedCharacters.join(' ');
-  if (wantNumericChar) finalCharacterPool += numericCharacters.join(' ');
-  if (wantSpecialChar) finalCharacterPool += specialCharacters.join(' '); 
+  if (wantLowercase) finalCharacterPool += lowerCasedCharacters.join('');    
+  if (wantUppercase) finalCharacterPool += upperCasedCharacters.join('');
+  if (wantNumericChar) finalCharacterPool += numericCharacters.join('');
+  if (wantSpecialChar) finalCharacterPool += specialCharacters.join(''); 
 
   return {
     lenght: lenghtOfPassword,
@@ -138,7 +138,11 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-  getPasswordOptions();
+  var options = getPasswordOptions();
+  // if no option is selected, return an empty string
+  if (!options) {
+    return '';
+  }
 }
 
 // Get references to the #generate element
